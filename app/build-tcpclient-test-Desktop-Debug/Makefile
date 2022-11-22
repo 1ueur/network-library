@@ -54,9 +54,13 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../../src/tcpclient.cpp \
 		../../src/tcpsession.cpp \
+		../../src/tlsclient.cpp \
+		../../src/tlssession.cpp \
 		../tcpclient-test/tcpclient-test.cpp 
 OBJECTS       = tcpclient.o \
 		tcpsession.o \
+		tlsclient.o \
+		tlssession.o \
 		tcpclient-test.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -115,6 +119,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		../tcpclient-test/.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -135,6 +140,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../../src/tlsclient.h \
 		../../src/tlssession.h ../../src/tcpclient.cpp \
 		../../src/tcpsession.cpp \
+		../../src/tlsclient.cpp \
+		../../src/tlssession.cpp \
 		../tcpclient-test/tcpclient-test.cpp
 QMAKE_TARGET  = tcpclient-test
 DESTDIR       = 
@@ -204,6 +211,7 @@ Makefile: ../tcpclient-test/tcpclient-test.pro /usr/lib/x86_64-linux-gnu/qt5/mks
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -276,6 +284,7 @@ Makefile: ../tcpclient-test/tcpclient-test.pro /usr/lib/x86_64-linux-gnu/qt5/mks
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -342,6 +351,18 @@ tcpclient.o: ../../src/tcpclient.cpp ../../src/tcpclient.h \
 tcpsession.o: ../../src/tcpsession.cpp ../../src/tcpsession.h \
 		../../src/session.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tcpsession.o ../../src/tcpsession.cpp
+
+tlsclient.o: ../../src/tlsclient.cpp ../../src/tlsclient.h \
+		../../src/tcpclient.h \
+		../../src/client.h \
+		../../src/tcpsession.h \
+		../../src/session.h \
+		../../src/tlssession.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tlsclient.o ../../src/tlsclient.cpp
+
+tlssession.o: ../../src/tlssession.cpp ../../src/tlssession.h \
+		../../src/session.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tlssession.o ../../src/tlssession.cpp
 
 tcpclient-test.o: ../tcpclient-test/tcpclient-test.cpp ../../src/tcpclient.h \
 		../../src/client.h \

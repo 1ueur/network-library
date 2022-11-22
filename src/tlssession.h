@@ -14,8 +14,8 @@ struct TlsSession : public Session {
 
     TlsSession(int sock = 0);
 
-    int SSL_read(SSL *ssl, void *buf, int num);
-    int SSL_write(SSL *ssl, const void *buf, int num);
-    void SSL_free(SSL *ssl);
+    int SSL_read(SSL *ssl, void *buf, int num) override;
+    int SSL_write(SSL *ssl, const void *buf, int num) override;
+    void SSL_free(SSL *ssl) override;
     bool close() override;
 };
